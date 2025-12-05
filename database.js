@@ -2,13 +2,14 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
-// Путь к файлу БД. Сохраняем его в папке данных приложения
-// Для простоты, пока будем использовать путь в корне проекта.
-const dbPath = path.resolve(__dirname, 'tasks.sqlite');
 let db;
 
-function initDatabase() {
+function initDatabase(userDataPath) {
     try {
+        // Убедимся, что папка для БД существует
+        // В данном случае это userDataPath, которая всегда есть.
+        const dbPath = path.join(userDataPath, 'tasks.sqlite');
+
         // Открытие или создание файла БД
         db = new Database(dbPath);
         db.pragma('journal_mode = WAL'); // Рекомендуемый режим для concurrency

@@ -26,13 +26,14 @@
   "build": {
     "appId": "com.taskdb.app",
     "productName": "TaskDB App",
+    "asar": true,
     "files": [
-      "**/*",
-      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
-      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
-      "!**/node_modules/*.d.ts",
-      "!**/node_modules/.bin",
-      "!**/*.{o,h,obj,cc,c,cpp,yml,ts,git,swp,npmignore,gypi}"
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "database.js",
+      "index.html",
+      "styles.css"
     ],
     "win": {
       "target": "nsis",

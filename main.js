@@ -36,7 +36,9 @@ function createWindow () {
 
 // Вызываем функцию создания окна, когда Electron готов
 app.whenReady().then(() => {
-  db.initDatabase(); // 2. Инициализируем БД перед созданием окна
+  // 2. Получаем путь к папке данных пользователя и инициализируем БД
+  const userDataPath = app.getPath('userData');
+  db.initDatabase(userDataPath);
   createWindow();
 });
 
