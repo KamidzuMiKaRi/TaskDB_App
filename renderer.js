@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Сбрасываем состояние блокировки на случай, если оно было установлено
         passwordInput.disabled = false;
+        passwordInput.readOnly = false;
         submitLoginButton.disabled = false;
 
         passwordInput.focus();
@@ -289,17 +290,19 @@ document.addEventListener('DOMContentLoaded', () => {
             newPasswordInput.disabled = true;
             confirmNewPasswordInput.disabled = true;
 
-            alert('Пароль успешно изменен!');
+            await window.db.showAlert({ message: 'Пароль успешно изменен!', title: 'Успех' });
             hideChangePasswordModal();
 
             // Показываем снова окно входа, но в заблокированном состоянии,
             // чтобы пользователь был вынужден его закрыть и войти заново.
             passwordInput.value = ''; // Очищаем поле
-            passwordInput.disabled = true; // Блокируем поле ввода
+            passwordInput.readOnly = true; // Блокируем поле для ввода, но оставляем возможность фокуса
             submitLoginButton.disabled = true; // Блокируем кнопку входа
             loginErrorMessage.textContent = 'Пароль изменен. Закройте окно и войдите снова.';
             loginErrorMessage.style.display = 'block';
             loginModal.style.display = 'flex'; // Показываем модальное окно напрямую
+            // Устанавливаем фокус, чтобы пользователь видел, где находится, и курсор мигал
+            passwordInput.focus();
         } else {
             changePasswordErrorMessage.textContent = `Ошибка: ${result.message}`;
             changePasswordErrorMessage.style.display = 'block';
@@ -349,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Получаем полные данные задачи
         const task = await window.db.getTaskById(taskId);
         if (!task) {
-            alert('Не удалось найти задачу для редактирования.');
+            await window.db.showAlert({ message: 'Не удалось найти задачу для редактирования.', title: 'Ошибка', type: 'error' });
             return;
         }
 
@@ -790,7 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tasks = await window.db.getAllTasks(filters);
         
         if (tasks.length === 0) {
-            alert('Нет данных для формирования отчета. Измените фильтры или добавьте задачи.');
+            await window.db.showAlert({ message: 'Нет данных для формирования отчета. Измените фильтры или добавьте задачи.', title: 'Информация' });
             return;
         }
 
@@ -830,8 +833,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 4. Вызываем метод main процесса для сохранения файла
         const result = await window.db.saveReport(csvContent);
-        if (result.success) alert(`Отчет успешно сохранен в: ${result.path}`);
-        else if (result.message !== 'Сохранение отменено.') alert(`Ошибка сохранения отчета: ${result.message}`);
+        if (result.success) {
+            await window.db.showAlert({ message: `Отчет успешно сохранен в: ${result.path}`, title: 'Отчет сохранен' });
+        } else if (result.message !== 'Сохранение отменено.') {
+            await window.db.showAlert({ message: `Ошибка сохранения отчета: ${result.message}`, title: 'Ошибка', type: 'error' });
+        }
     });
 
 

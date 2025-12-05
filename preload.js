@@ -36,6 +36,9 @@ contextBridge.exposeInMainWorld(
     // Новая функция для диалога подтверждения
     showConfirmDialog: (message) => ipcRenderer.invoke('app:show-confirm-dialog', message),
 
+    // Новая функция для информационного сообщения
+    showAlert: (options) => ipcRenderer.invoke('app:show-alert', options),
+
     // Функция смены пароля
     updateAdminPassword: (oldPassword, newPassword) => ipcRenderer.invoke('app:update-admin-password', { oldPassword, newPassword }),
   }

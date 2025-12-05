@@ -170,6 +170,18 @@ ipcMain.handle('app:show-confirm-dialog', async (event, message) => {
   return result.response === 1; // Возвращает true, если нажата кнопка "Удалить"
 });
 
+ipcMain.handle('app:show-alert', async (event, options) => {
+  if (!mainWindow) return;
+
+  const { message, title, type } = options;
+  await dialog.showMessageBox(mainWindow, {
+    type: type || 'info',
+    buttons: ['OK'],
+    title: title || 'Информация',
+    message: message,
+  });
+});
+
 ipcMain.handle('app:update-admin-password', async (event, { oldPassword, newPassword }) => {
   return db.updateAdminPassword(oldPassword, newPassword);
 });
