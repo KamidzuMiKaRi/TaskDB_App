@@ -1,0 +1,303 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Шапка приложения */
+.app-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+#auth-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#login-button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+#login-button:hover {
+    background-color: #16a085;
+}
+
+/* Основной контейнер */
+.app-main {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 250px;
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-right: 1px solid #bdc3c7;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.sidebar-title {
+    color: #34495e;
+    font-size: 1.2em;
+    margin-top: 0;
+}
+
+#filter-area label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#filter-area input[type="number"] {
+    width: calc(100% - 10px);
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.nav-button, .action-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    text-align: left;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-button:hover:not(:disabled), .action-button:hover:not(:disabled) {
+    background-color: #dde1e2;
+}
+
+.nav-button.active-nav {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Основная область контента */
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Таблица задач */
+#task-list-table,
+#contests-table,
+#tags-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#task-list-table th, #task-list-table td,
+#contests-table th, #contests-table td,
+#tags-table th, #tags-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+#task-list-table th,
+#contests-table th,
+#tags-table th {
+    background-color: #34495e;
+    color: white;
+    font-weight: bold;
+}
+
+/* Стили для кнопок действий */
+#add-task-button {
+    background-color: #2ecc71;
+    color: white;
+    width: auto;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+#add-task-button:hover:not(:disabled) {
+    background-color: #27ae60;
+}
+
+/* Скрываем элементы администратора по умолчанию */
+.admin-only:not(.is-admin) {
+    display: none; /* !important убран для лучшей управляемости через JS */
+}
+
+/* Состояние disabled */
+button:disabled,
+input:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Стили для модального окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 500px;
+    text-align: center;
+    max-height: 90vh; /* Ограничиваем высоту, чтобы окно не выходило за пределы экрана */
+    overflow-y: auto; /* Добавляем вертикальную прокрутку, если содержимое не помещается */
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.modal-content input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+}
+
+.error-text {
+    color: #e74c3c;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.field-error-text {
+    color: #e74c3c;
+    font-size: 0.85em;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.management-form {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.management-form form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.management-form input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+/* Стили для формы в модальном окне */
+.modal-form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.modal-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-form-group input[type="text"],
+.modal-form-group input[type="number"],
+.modal-form-group input[type="url"],
+.modal-form-group textarea {
+    width: calc(100% - 22px); /* Учитываем padding и border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.modal-form-group textarea {
+    resize: vertical;
+    min-height: 40px;
+}
+
+.checkbox-group {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.checkbox-group label {
+    display: block;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.checkbox-label {
+    display: block;
+    margin-bottom: 5px;
+}

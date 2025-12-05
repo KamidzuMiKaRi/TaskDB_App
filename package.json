@@ -1,0 +1,42 @@
+{
+  "name": "taskdb_app",
+  "version": "1.0.0",
+  "description": "Database application for programming tasks",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-rebuild",
+    "build": "electron-builder"
+  },
+  "keywords": [
+    "electron",
+    "sqlite"
+  ],
+  "author": "Анохин Никита, Кадыров Михаил",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3",
+    "electron-rebuild": "^3.2.9"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.0.0"
+  },
+  "build": {
+    "appId": "com.taskdb.app",
+    "productName": "TaskDB App",
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{o,h,obj,cc,c,cpp,yml,ts,git,swp,npmignore,gypi}"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    }
+  }
+}
